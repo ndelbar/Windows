@@ -53,7 +53,7 @@ namespace MudClient
         {
             try
             {
-                byte[] data = new byte[50];
+                byte[] data = new byte[100];
 
                 while (m_bRunListeningThread)
                 {
@@ -63,12 +63,14 @@ namespace MudClient
 
                         System.Threading.Thread.Sleep(100);
 
-                        if (m_strAppend.Length == 0)
+                        if (m_strAppend.Length == 0 && ns.DataAvailable)
                         {
                             int recv = ns.Read(data, 0, data.Length);
                             m_strAppend = Encoding.ASCII.GetString(data, 0, recv);
                         }
                     }
+
+                    Console.Beep();
                 }
             }
             catch (Exception e)
@@ -88,6 +90,7 @@ namespace MudClient
                         this.Dispatcher.Invoke(() =>
                         {
                             m_strMainWindow.Text += m_strAppend;
+                            m_strMainWindow.ScrollToEnd();
                             m_strAppend = "";
                         });
                     }
@@ -104,6 +107,8 @@ namespace MudClient
             try
             {
                 m_Server = new TcpClient("MidnightSun2.org", 3000);
+                m_Server.NoDelay = true;
+                m_Server.Client.NoDelay = true;
             }
             catch (SocketException)
             {
@@ -120,7 +125,25 @@ namespace MudClient
 
         private void Button_Click_Send(object sender, RoutedEventArgs e)
         {
+            NetworkStream ns = m_Server.GetStream();
 
+            while (true)
+            {
+                if (ns.CanWrite)
+                {
+                    try
+                    {
+                        byte[] myWriteBuffer = Encoding.ASCII.GetBytes("Textbox");
+                        ns.Write(myWriteBuffer, 0, myWriteBuffer.Length);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("{0} First exception caught.", ex);
+                    }
+
+                    break;
+                }
+            }
         }
     }
 
