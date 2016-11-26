@@ -133,6 +133,7 @@ namespace MudClient
                     {
                         byte[] myWriteBuffer = Encoding.ASCII.GetBytes(m_strInput.Text + "\r\n");
                         ns.Write(myWriteBuffer, 0, myWriteBuffer.Length);
+                        m_strInput.Text = "";
                     }
                     catch (Exception ex)
                     {
