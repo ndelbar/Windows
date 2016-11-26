@@ -69,8 +69,6 @@ namespace MudClient
                             m_strAppend = Encoding.ASCII.GetString(data, 0, recv);
                         }
                     }
-
-                    Console.Beep();
                 }
             }
             catch (Exception e)
@@ -133,7 +131,7 @@ namespace MudClient
                 {
                     try
                     {
-                        byte[] myWriteBuffer = Encoding.ASCII.GetBytes("Textbox");
+                        byte[] myWriteBuffer = Encoding.ASCII.GetBytes(m_strInput.Text + "\r\n");
                         ns.Write(myWriteBuffer, 0, myWriteBuffer.Length);
                     }
                     catch (Exception ex)
