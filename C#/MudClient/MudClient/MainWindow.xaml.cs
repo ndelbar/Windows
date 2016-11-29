@@ -17,6 +17,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.ComponentModel;
 using System.IO;
+using System.Text.RegularExpressions;
 
 
 
@@ -53,7 +54,7 @@ namespace MudClient
         {
             try
             {
-                byte[] data = new byte[100];
+                byte[] data = new byte[10000];
 
                 while (m_bRunListeningThread)
                 {
@@ -87,8 +88,7 @@ namespace MudClient
                     {
                         this.Dispatcher.Invoke(() =>
                         {
-                            m_strMainWindow.Text += m_strAppend;
-                            m_strMainWindow.ScrollToEnd();
+                            AppendTextToMainWindow(m_strAppend);
                             m_strAppend = "";
                         });
                     }
@@ -98,6 +98,20 @@ namespace MudClient
             {
                 Console.Beep();
             }
+        }
+
+        public void AppendTextToMainWindow(string strMessage)
+        {
+            // This strategy gets rid of text colors, and keeps the code simple. 
+            // Adding color to text will be a future project
+            // Example of the color info is:
+            // There are five obvious exits: [0m[1m[32meast[0m, [0m[1m[32mnorth[0m, [0m[1m[32msouth[0m, [0m[1m[32mup[0m and [0m[1m[32mwest[0m
+
+            strMessage = strMessage.Replace("\r\n", "\r");
+            strMessage = Regex.Replace(strMessage, @"[\[\]].*?m", string.Empty);
+            m_strMainWindow.AppendText(strMessage);
+
+            m_strMainWindow.ScrollToEnd();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -110,7 +124,7 @@ namespace MudClient
             }
             catch (SocketException)
             {
-                m_strMainWindow.Text = "Unable to connect...";
+                m_strMainWindow.AppendText("Unable to connect...");
             }
 
             m_bConnected = true;
