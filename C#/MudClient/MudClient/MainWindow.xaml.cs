@@ -121,7 +121,7 @@ namespace MudClient
         String m_strAppend = "";
         TcpClient m_Server;
 
-        private void Button_Click_Send(object sender, RoutedEventArgs e)
+        private void SendCommandToServer()
         {
             NetworkStream ns = m_Server.GetStream();
 
@@ -143,6 +143,17 @@ namespace MudClient
                     break;
                 }
             }
+        }
+
+        private void Button_Click_Send(object sender, RoutedEventArgs e)
+        {
+            SendCommandToServer();
+        }
+
+        private void Button_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+                SendCommandToServer();
         }
     }
 
