@@ -1,0 +1,32 @@
+
+7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+
+Scanning the drive for archives:
+1 file, 8607232 bytes (8406 KiB)
+
+Extracting archive: C:\Users\Nick\Desktop\238e9.msi
+--
+Path = C:\Users\Nick\Desktop\238e9.msi
+Type = Compound
+Physical Size = 8607232
+Extension = msi
+Cluster Size = 512
+Sector Size = 64
+----
+Path = Setup.cab
+Size = 6967364
+Packed Size = 6967808
+--
+Path = Setup.cab
+Type = Cab
+Physical Size = 6967364
+Method = MSZip
+Blocks = 939
+Volumes = 1
+Volume Index = 0
+ID = 0
+
+Everything is Ok
+
+Size:       9612
+Compressed: 8607232
