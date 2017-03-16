@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
 
 namespace Blend_Test_1
 {
@@ -68,5 +70,26 @@ namespace Blend_Test_1
         Thread m_threadTick;
         bool m_bMouseOver = false;
         int m_nTotalTime = 0;
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd,
+                         int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        private void Form1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == MouseButtonState.Pressed)
+            {
+                ReleaseCapture();
+                Window window = Window.GetWindow(this);
+                var wih = new WindowInteropHelper(window);
+                IntPtr hWnd = wih.Handle;
+                SendMessage(hWnd, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
     }
 }
