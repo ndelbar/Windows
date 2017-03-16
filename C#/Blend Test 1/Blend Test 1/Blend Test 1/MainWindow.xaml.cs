@@ -84,12 +84,17 @@ namespace Blend_Test_1
         {
             if (e.ButtonState == MouseButtonState.Pressed)
             {
-                ReleaseCapture();
-                Window window = Window.GetWindow(this);
-                var wih = new WindowInteropHelper(window);
-                IntPtr hWnd = wih.Handle;
-                SendMessage(hWnd, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+                MoveWindowNormally();
             }
+        }
+
+        private void MoveWindowNormally()
+        {
+            ReleaseCapture();
+            Window window = Window.GetWindow(this);
+            var wih = new WindowInteropHelper(window);
+            IntPtr hWnd = wih.Handle;
+            SendMessage(hWnd, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
         }
     }
 }
