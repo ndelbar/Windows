@@ -16,43 +16,6 @@ using System.Threading;
 
 namespace Blend_Test_1
 {
-    //public class TickThread
-    //{
-    //    public void Tick()
-    //    {
-    //        while (true)
-    //        {
-    //            if (m_bMouseOver)
-    //            {
-    //                System.Diagnostics.Debug.WriteLine("Tick");
-
-    //                this.m_LabelToEdit.Begin
-
-                    
-    //                m_LabelToEdit.Content = "Hello World";
-    //            }
-
-
-    //            System.Threading.Thread.Sleep(1000);
-    //        }
-    //    }
-
-    //    bool m_bMouseOver = false;
-    //    Label m_LabelToEdit;
-
-    //    public void SetMouseOver(bool bMouseOver)
-    //    {
-    //        m_bMouseOver = bMouseOver;
-    //    }
-
-    //    public void SetLabelToEdit(Label pLabel)
-    //    {
-    //        m_LabelToEdit = pLabel;
-    //    }
-
-
-    //}
-    
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
