@@ -1,0 +1,15 @@
+﻿<Window x:Class="Blend_Test_1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Blend_Test_1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525" Closing="appClosing">
+    <Grid>
+        <Ellipse x:Name="Background" Margin="146,47" Stroke="Black" RenderTransformOrigin="0.5,0.5" Fill="#FFBDBDBD" MouseEnter="eventMouseEnter" MouseLeave="eventMouseLeave"/>
+        <Ellipse x:Name="Background2" Fill="#FF212121" Margin="157,58" Stroke="Black" MouseEnter="eventMouseEnter" MouseLeave="eventMouseLeave"/>
+        <Label x:Name="TimeDuration" Content="00:00:00" Margin="188,126,179,134" Background="#00322F2F" Foreground="White" FontSize="36" MouseEnter="eventMouseEnter" MouseLeave="eventMouseLeave"/>
+
+    </Grid>
+</Window>
