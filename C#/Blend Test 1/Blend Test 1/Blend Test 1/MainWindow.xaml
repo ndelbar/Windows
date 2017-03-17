@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Blend_Test_1"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" Closing="appClosing" AllowsTransparency="True" WindowStyle="None" Background="Transparent">
-    <Grid>
+    <Grid Loaded="WndLoaded">
         <Ellipse x:Name="Background" Margin="146,47" Stroke="Black" RenderTransformOrigin="0.5,0.5" Fill="#FFBDBDBD" MouseEnter="eventMouseEnter" MouseLeave="eventMouseLeave"/>
         <Ellipse x:Name="Background2" Fill="#FF212121" Margin="157,58" Stroke="Black" MouseEnter="eventMouseEnter" MouseLeave="eventMouseLeave" MouseDown="Form1_MouseDown"/>
         <Label x:Name="TimeDuration" Content="00:00:00" Margin="188,126,179,134" Background="#00322F2F" Foreground="White" FontSize="36" MouseEnter="eventMouseEnter" MouseLeave="eventMouseLeave"/>

@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
+using System.Speech.Recognition;
 
 namespace Blend_Test_1
 {
@@ -30,6 +31,43 @@ namespace Blend_Test_1
             m_threadTick = new Thread(Tick);
 
             m_threadTick.Start();
+        }
+
+        // Create a simple handler for the SpeechRecognized event.
+        void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        {
+            //MessageBox.Show("Speech recognized: " + e.Result.Text);
+
+            TimeDuration.Content = e.Result.Text;
+        }
+
+        private void WndLoaded(object sender, RoutedEventArgs e)
+        {
+            // Create a new SpeechRecognitionEngine instance.
+            SpeechRecognizer recognizer = new SpeechRecognizer();
+
+            // Create a simple grammar that recognizes "red", "green", or "blue".
+            Choices colors = new Choices();
+            colors.Add(new string[] { "red", "green", "blue" });
+
+            // Create a GrammarBuilder object and append the Choices object.
+            GrammarBuilder gb = new GrammarBuilder();
+            gb.Append(colors);
+
+            // Create the Grammar instance and load it into the speech recognition engine.
+            Grammar g = new Grammar(gb);
+
+            try
+            {
+                recognizer.LoadGrammar(g);
+            }
+            catch
+            {
+            };
+
+            // Register a handler for the SpeechRecognized event.
+            recognizer.SpeechRecognized +=
+              new EventHandler<SpeechRecognizedEventArgs>(sre_SpeechRecognized);
         }
 
         public void Tick()
