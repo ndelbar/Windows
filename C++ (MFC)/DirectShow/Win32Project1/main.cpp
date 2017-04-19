@@ -9,16 +9,29 @@ int CALLBACK WinMain(
 	_In_ int       nCmdShow
 )
 {
-	HRESULT hr = CoInitialize(NULL);
-	ThrowIfError(hr);
+	HRESULT hr = NULL;
+	IGraphBuilder* pGraph = NULL;
 
-	IGraphBuilder* pGraph;
-	hr = CoCreateInstance(CLSID_FilterGraph, NULL,
-		CLSCTX_INPROC_SERVER, IID_IGraphBuilder, (void**)&pGraph);
+	try
+	{
+		HRESULT hr = CoInitialize(NULL);
+		ThrowIfError(hr);
+		
+		hr = CoCreateInstance(CLSID_FilterGraph, NULL,
+			CLSCTX_INPROC_SERVER, IID_IGraphBuilder, (void**)&pGraph);
 
-	ThrowIfError(hr);
+		ThrowIfError(hr);
+	}
+	catch (...)
+	{
+	}
+
+
+	if (pGraph)
+		pGraph->Release();
 
 	CoUninitialize();
+
 	return hr;
 }
 
