@@ -187,3 +187,7 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/.vs/Windows/v15/Browse.VC.opendb
+/.vs/Windows/v15/Browse.VC.db
+/.vs/slnx.sqlite
+/.vs/ProjectSettings.json
