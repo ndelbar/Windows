@@ -56,6 +56,7 @@ dlldata.c
 *.pidb
 *.svclog
 *.scc
+*.ini
 
 # Chutzpah Test files
 _Chutzpah*
@@ -191,5 +192,3 @@ ModelManifest.xml
 /.vs/Windows/v15/Browse.VC.db
 /.vs/slnx.sqlite
 /.vs/ProjectSettings.json
-/Python/StockSmsHelper/Support/__pycache__/localIni.cpython-36.pyc
-/Python/StockSmsHelper/Support/__pycache__
