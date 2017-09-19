@@ -16,6 +16,8 @@ class MyHTMLParser(HTMLParser):
     bLastCloseFound = False
     bChangeFound = False
     bChangePercentFound = False
+    bLastSignalDate = False
+    bFirstTableElementFound = False
     
     def handle_starttag(self, tag, attrs):
         for a, b in attrs:
@@ -28,6 +30,9 @@ class MyHTMLParser(HTMLParser):
                     self.bChangeFound = True
                 if b == 'MainContent_ChangePercent':
                     self.bChangePercentFound = True
+                if b == 'MainContent_signalpagehistory_PatternHistory24_DXDataRow0':
+                    self.bLastSignalDate = True
+
                     
 
     def handle_data(self, data):
@@ -48,6 +53,13 @@ class MyHTMLParser(HTMLParser):
             strFinalMessage += data + "\n"
             print("Percent Change: ", data)
             self.bChangePercentFound = False
+        if self.bFirstTableElementFound:
+            strFinalMessage += data + "\n"
+            print("Date of Signal: "), data
+            self.bFirstTableElementFound = False
+            self.bLastSignalDate = False
+        if self.bLastSignalDate:
+            self.bFirstTableElementFound = True
       
 
 def DisplayStatus(Company):
