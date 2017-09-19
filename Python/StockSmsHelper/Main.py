@@ -50,21 +50,26 @@ class MyHTMLParser(HTMLParser):
             self.bChangePercentFound = False
       
 
-def DisplayStatus(strCompany):
-    url = "https://www.americanbulls.com/SignalPage.aspx?lang=en&Ticker=" + strCompany
+def DisplayStatus(Company):
+    url = "https://www.americanbulls.com/SignalPage.aspx?lang=en&Ticker=" + Company
     myPage = urllib.request.urlopen(url)
     parser = MyHTMLParser()
     parser.feed(myPage.read().decode("utf-8"))
 
-myCompanies = ['TSLA','DIS','FB','COF','AMZN','MSFT','NFLX','MSI','SNE']
+MAIN_USER = localIni.GetEmailUserName()
+MAIN_PASSWORD = localIni.GetEmailPassword()
+MSG_START = "********\r" + time.strftime("%m/%d/%Y") + "\r********\r" + time.strftime("%A")
 
-for strCompanies in myCompanies:
-    print(strCompanies)
-    strFinalMessage += strCompanies + ': '
-    DisplayStatus(strCompanies)
-    strFinalMessage = strFinalMessage[:-1]
-    SendGmail.send_GMail(localIni.GetEmailUserName(),localIni.GetEmailPassword(),localIni.GetMainSMSEmail(),'Stock Tips',strFinalMessage)
-    strFinalMessage = ""
+for User in localIni.GetClients():
+    SendGmail.send_GMail(MAIN_USER, MAIN_PASSWORD, localIni.GetSMSEmail(User),'', MSG_START)
+    Companies = localIni.GetCompanies(User).split(',')
+    for Company in Companies:
+        print(Company)
+        strFinalMessage += Company + ': '
+        DisplayStatus(Company)
+        strFinalMessage = strFinalMessage[:-1]
+        SendGmail.send_GMail(MAIN_USER, MAIN_PASSWORD, localIni.GetSMSEmail(User),'',strFinalMessage)
+        strFinalMessage = ""
 
 
 print(strFinalMessage)

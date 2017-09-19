@@ -47,3 +47,18 @@ def GetMainSMSEmail():
     config.read('LoginInfo.ini')
     return config.get('stock.sms.helper','MainSMSEmail')
 
+def GetClients():
+    config = ConfigParser()
+    config.read('UserInfo.ini')
+    return config.sections()
+
+def GetCompanies(user):
+    config = ConfigParser()
+    config.read('UserInfo.ini')
+    return config.get(user, 'stocklist')
+
+def GetSMSEmail(user):
+    config = ConfigParser()
+    config.read('UserInfo.ini')
+    return config.get(user, 'sms_email')
+
