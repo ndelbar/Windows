@@ -62,3 +62,20 @@ def GetSMSEmail(user):
     config.read('UserInfo.ini')
     return config.get(user, 'sms_email')
 
+def StoreStockInfo(Stock, Signal):
+    config = ConfigParser()
+    config.read('StockInfo.ini')
+    if not config.has_section(Stock):
+        config.add_section(Stock)
+    config.set(Stock, 'LastKnownStockSignal', Signal)
+    with open('StockInfo.ini', 'w') as configfile:
+        config.write(configfile)
+
+def GetPreviousStockSignal(Stock):
+    config = ConfigParser()
+    config.read('StockInfo.ini')
+    if not config.has_section(Stock):
+        return 'No Previous Info'
+    return "Previously: " + config.get(Stock, 'lastknownstocksignal')
+
+
