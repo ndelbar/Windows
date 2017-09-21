@@ -35,8 +35,6 @@ class MyHTMLParser(HTMLParser):
                 if b == 'MainContent_signalpagehistory_PatternHistory24_DXDataRow0':
                     self.bLastSignalDate = True
 
-                    
-
     def handle_data(self, data):
         global strFinalMessage
         if self.bLastSignalFound:
@@ -57,7 +55,6 @@ class MyHTMLParser(HTMLParser):
             self.bLastSignalDate = False
         if self.bLastSignalDate:
             self.bFirstTableElementFound = True
-      
 
 def DisplayStatus(Company):
     url = "https://www.americanbulls.com/SignalPage.aspx?lang=en&Ticker=" + Company
@@ -70,11 +67,9 @@ def GetCompanyInfo(Signal):
     return Info
 
 def CreateMessage(Company):
+    global bToday
     bToday = time.strftime("%m/%d/%Y") == CompanyInfo['DateOfSignal']
     global strFinalMessage
-    strFinalMessage = ''
-    if bToday:
-        strFinalMessage = "**TODAY**\n"
     strFinalMessage += GetCompanyInfo('DateOfSignal')   + "\n"
     strFinalMessage += GetCompanyInfo('LastSignal')     + "\n"
     strFinalMessage += GetCompanyInfo('LastClose')      + "\n"
@@ -86,18 +81,16 @@ def CreateMessage(Company):
 
 MAIN_USER = localIni.GetEmailUserName()
 MAIN_PASSWORD = localIni.GetEmailPassword()
-MSG_START = "********\r" + time.strftime("%m/%d/%Y") + "\r********\r" + time.strftime("%A")
 
 for User in localIni.GetClients():
-    SendGmail.send_GMail(MAIN_USER, MAIN_PASSWORD, localIni.GetSMSEmail(User),'', MSG_START)
     Companies = localIni.GetCompanies(User).split(',')
     for Company in Companies:
-        print(Company)
-        strFinalMessage += Company + ': '
+        strFinalMessage += Company + ":\n"
         DisplayStatus(Company)
-        strFinalMessage = strFinalMessage[:-1]
-        SendGmail.send_GMail(MAIN_USER, MAIN_PASSWORD, localIni.GetSMSEmail(User),'',strFinalMessage)
         CreateMessage(Company)
-        print(strFinalMessage)
+        if bToday:
+            SendGmail.send_GMail(MAIN_USER, MAIN_PASSWORD, localIni.GetSMSEmail(User),'',strFinalMessage)
+            print(strFinalMessage)
+        strFinalMessage = ''
 
 print(strFinalMessage)
