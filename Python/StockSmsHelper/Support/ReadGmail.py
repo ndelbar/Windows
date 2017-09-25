@@ -26,7 +26,7 @@ def read_email_from_gmail():
         latest_email_id = int(id_list[-1])
         print(first_email_id)
         print(latest_email_id)
-        for i in range(latest_email_id,first_email_id, -1):
+        for i in range(latest_email_id,first_email_id - 1, -1):
             typ, data = mail.fetch(str(i), '(RFC822)' )
             for response_part in data:
                 if isinstance(response_part, tuple):
@@ -52,4 +52,4 @@ FROM_PWD    = localIni.GetEmailPassword()
 SMTP_SERVER = "imap.gmail.com"
 SMTP_PORT   = 993
 
-read_email_from_gmail()
+

@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{62ccbcad-65e5-49ab-8930-1b91b5ae0046}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>Main.py</StartupFile>
+    <StartupFile>Main_Read.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
