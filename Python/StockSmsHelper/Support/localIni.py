@@ -25,7 +25,7 @@ def AddList(strEmail,strList):
     if not config.has_section(strEmail):
         config.add_section(strEmail)
         
-    config.set(strEmail, 'UserName', 'Nicholas')
+    #config.set(strEmail, 'UserName', 'Nicholas')
     config.set(strEmail, 'StockList', strList)
 
     # save to a file
