@@ -28,6 +28,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Support\localIni.py" />
+    <Compile Include="Support\MoveGmail.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Support\ReadGmail.py" />
     <Compile Include="Support\SendGmail.py" />
     <Compile Include="Test.py" />
