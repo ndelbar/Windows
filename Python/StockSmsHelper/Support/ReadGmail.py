@@ -3,6 +3,7 @@ import time
 import imaplib
 import email
 import localIni
+import AmericanBulls
 # -------------------------------------------------
 #
 # Utility to read email from Gmail Using Python
@@ -11,6 +12,12 @@ import localIni
 
 strKeySubject = "SMSHELPME"
 strKeyUseStocks = "USESTOCKS:"
+strKeySendAll = "SENDALL"
+
+def GetInfo(Key, msg):
+    iSubjectStart = msg.find(strKeyUseStocks) + len(strKeyUseStocks)
+    iSubjectStop = msg.find('\\',iSubjectStart)
+    strCommand = msg[iSubjectStart:iSubjectStop]
 
 def read_email_from_gmail():
     try:
@@ -39,14 +46,13 @@ def read_email_from_gmail():
                     FROM = part.get('from').upper().replace(' ','')
                     break
                 if (SUBJECT == strKeySubject):
-                    print(msg)
-                    iSubjectStart = msg.find(strKeyUseStocks) + len(strKeyUseStocks)
-                    iSubjectStop = msg.find('\\',iSubjectStart)
-                    strCommand = msg[iSubjectStart:iSubjectStop]
-                    print(iSubjectStart)
-                    print(iSubjectStop)
+                    strCommand = GetInfo(strKeyUseStocks,msg)
                     print(strCommand)
-                    localIni.AddList(FROM,strCommand)
+                    if strCommand != None:
+                        localIni.AddList(FROM,strCommand)
+                    if (msg.find(strKeySendAll) != -1):
+                        AmericanBulls.AllRoutine(FROM)
+        
             except:
                 print('cant read email')
         imapSession.close()
