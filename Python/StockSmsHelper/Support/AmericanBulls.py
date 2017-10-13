@@ -8,6 +8,7 @@ import localIni
 strFinalMessage = ''
 CompanyInfo = {}
 bToday = False
+bFirstSignal = False
 
 class MyHTMLParser(HTMLParser):
 
@@ -65,7 +66,10 @@ def GetCompanyInfo(Signal):
 
 def CreateMessage(Company, bGetPrevious = True):
     global bToday
-    bToday = time.strftime("%m/%d/%Y") == CompanyInfo['DateOfSignal']
+    global bFirstSignal
+    SIGNAL_TIME = CompanyInfo['DateOfSignal']
+    bToday = time.strftime("%m/%d/%Y") == SIGNAL_TIME
+    print(SIGNAL_TIME)
     global strFinalMessage
     strFinalMessage += GetCompanyInfo('DateOfSignal')   + "\n"
     strFinalMessage += GetCompanyInfo('LastSignal')     + "\n"
@@ -74,10 +78,13 @@ def CreateMessage(Company, bGetPrevious = True):
     strFinalMessage += GetCompanyInfo('PercentChange')
     if bToday and bGetPrevious:
         strFinalMessage += "\n" + localIni.GetPreviousStockSignal(Company)
-    localIni.StoreStockInfo(Company, CompanyInfo['LastSignal'])
+        if localIni.GetPreviousStockSignal(Company) != CompanyInfo['LastSignal']:
+            bFirstSignal = True
+            localIni.StoreStockInfo(Company, CompanyInfo['LastSignal'])
 
 def DailyRoutine():
     global strFinalMessage
+    global bFirstSignal
     MAIN_USER = localIni.GetEmailUserName()
     MAIN_PASSWORD = localIni.GetEmailPassword()
     print( localIni.GetClients())
@@ -88,9 +95,10 @@ def DailyRoutine():
             DisplayStatus(Company)
             CreateMessage(Company)
             print(Company)
-            if bToday:
+            if bToday and bFirstSignal:
                 SendGmail.send_GMail(MAIN_USER, MAIN_PASSWORD, localIni.GetSMSEmail(User),'',strFinalMessage)
                 print(strFinalMessage)
+                bFirstSignal = False
             strFinalMessage = ''
 
 def AllRoutine(REQUESTED_USER):
