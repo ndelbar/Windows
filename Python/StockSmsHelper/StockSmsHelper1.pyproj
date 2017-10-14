@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{62ccbcad-65e5-49ab-8930-1b91b5ae0046}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>Main_Read.pyw</StartupFile>
+    <StartupFile>Main.pyw</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -24,6 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.py" />
+    <Compile Include="Main.pyw" />
     <Compile Include="Main_Read.pyw">
       <SubType>Code</SubType>
     </Compile>

@@ -78,7 +78,9 @@ def CreateMessage(Company, bGetPrevious = True):
     strFinalMessage += GetCompanyInfo('PercentChange')
     if bToday and bGetPrevious:
         strFinalMessage += "\n" + localIni.GetPreviousStockSignal(Company)
-        if localIni.GetPreviousStockSignal(Company) != CompanyInfo['LastSignal']:
+        LAST_KNOWN_SIGNAL = localIni.GetPreviousStockSignal(Company)
+        CURRENT_SIGNAL = CompanyInfo['LastSignal']
+        if CURRENT_SIGNAL not in LAST_KNOWN_SIGNAL:
             bFirstSignal = True
             localIni.StoreStockInfo(Company, CompanyInfo['LastSignal'])
 
