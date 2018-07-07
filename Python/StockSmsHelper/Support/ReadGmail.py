@@ -19,6 +19,7 @@ def GetInfo(Key, msg):
     iSubjectStart = msg.find(strKeyUseStocks) + len(strKeyUseStocks)
     iSubjectStop = msg.find('\\',iSubjectStart)
     strCommand = msg[iSubjectStart:iSubjectStop]
+    return strCommand
         
 def SendCourtesyEmail(ToEmail):
     MESSAGE = "Thanks for using Stock.Sms.Helper\r\nYour email has been received\r\n\r\nAs a reminder, the subject needs to have SmsHelpMe in the subject, and one of the following commands in the email body:\r\nUseStocks:<Comma Delimited List>\r\nSendAll"

@@ -37,7 +37,6 @@
     </Compile>
     <Compile Include="Support\ReadGmail.py" />
     <Compile Include="Support\SendGmail.py" />
-    <Compile Include="Test.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Support" />
