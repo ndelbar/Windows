@@ -99,6 +99,7 @@ def DailyRoutine():
             print(Company)
             if bToday and bFirstSignal:
                 SendGmail.send_GMail(MAIN_USER, MAIN_PASSWORD, localIni.GetSMSEmail(User),'',strFinalMessage)
+                SendGmail.send_GMail(MAIN_USER, MAIN_PASSWORD, User,'Signal Change',strFinalMessage)
                 print(strFinalMessage)
                 bFirstSignal = False
             strFinalMessage = ''
