@@ -76,6 +76,8 @@ def GetPreviousStockSignal(Stock):
     config.read('StockInfo.ini')
     if not config.has_section(Stock):
         return 'No Previous Info'
+    if not config.has_option(Stock,'lastknownstocksignal'):
+        return 'No Previous Info'
     return "Previously: " + config.get(Stock, 'lastknownstocksignal')
 
 

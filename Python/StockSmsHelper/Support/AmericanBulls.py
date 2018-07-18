@@ -69,6 +69,7 @@ def CreateMessage(Company, bGetPrevious = True):
     global bFirstSignal
     SIGNAL_TIME = CompanyInfo['DateOfSignal']
     bToday = time.strftime("%m/%d/%Y") == SIGNAL_TIME
+    bToday = True
     print(SIGNAL_TIME)
     global strFinalMessage
     strFinalMessage += GetCompanyInfo('DateOfSignal')   + "\n"
