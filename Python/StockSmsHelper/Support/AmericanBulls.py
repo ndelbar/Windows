@@ -88,6 +88,7 @@ def CreateMessage(Company, bGetPrevious = True):
 def DailyRoutine():
     global strFinalMessage
     global bFirstSignal
+    localIni.CreatePreviousStockINI()
     MAIN_USER = localIni.GetEmailUserName()
     MAIN_PASSWORD = localIni.GetEmailPassword()
     print( localIni.GetClients())
