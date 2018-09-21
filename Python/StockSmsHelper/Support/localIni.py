@@ -3,6 +3,8 @@ try:
 except ImportError:
     from ConfigParser import ConfigParser  # ver. < 3.0
 
+from shutil import copyfile
+
 def AddList(strEmail,strList):
 
     # instantiate
@@ -25,7 +27,7 @@ def AddList(strEmail,strList):
     if not config.has_section(strEmail):
         config.add_section(strEmail)
         
-    config.set(strEmail, 'UserName', 'Nicholas')
+    #config.set(strEmail, 'UserName', 'Nicholas')
     config.set(strEmail, 'StockList', strList)
 
     # save to a file
@@ -73,9 +75,14 @@ def StoreStockInfo(Stock, Signal):
 
 def GetPreviousStockSignal(Stock):
     config = ConfigParser()
-    config.read('StockInfo.ini')
+    config.read('PreviousStockInfo.ini')
     if not config.has_section(Stock):
         return 'No Previous Info'
+    if not config.has_option(Stock,'lastknownstocksignal'):
+        return 'No Previous Info'
     return "Previously: " + config.get(Stock, 'lastknownstocksignal')
+
+def CreatePreviousStockINI():
+    copyfile('StockInfo.ini', 'PreviousStockInfo.ini')
 
 
