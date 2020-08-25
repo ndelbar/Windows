@@ -1,0 +1,11 @@
+<svg >
+  <rect id="main_Window" width="100%" height="100%"/>
+  <rect id="main_Window2" width="100%" height="20%" x="0" y="0" />
+  <text id="speed-label" class="sensor-label">Speed (mph)</text>
+  <text id="speed-data" class="sensor-data">... </text>
+  <use id="btn-tr" href="#combo-button-upper-right" fill="fb-peach">
+    <set href="combo-button-icon" attributeName="href" to="start.png"/>
+    <set href="combo-button-icon-press" attributeName="href" to="start.png"/>
+    <set href="combo-button-stroke" attributeName="display" to="inline"/>
+  </use>
+</svg>

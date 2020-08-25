@@ -1,0 +1,21 @@
+.sensor-label {
+  font-family: System-Regular;
+  fill: white;
+  text-anchor: start;
+  text-length: 32;
+  font-size: 40;
+  x: 5%;
+  y: 40;
+}
+
+.sensor-data {
+  font-family: System-Light;
+  fill: yellow;
+  text-anchor: start;
+  text-length: 64;
+  font-size: 200;
+  x: 2%;
+  y: 220;
+}
+
+
