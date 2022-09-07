@@ -195,3 +195,4 @@ ModelManifest.xml
 /Python/StockSmsHelper/Support/__pycache__
 *.json
 *.json
+/C#/MudClient/.vs/MudClient/FileContentIndex
